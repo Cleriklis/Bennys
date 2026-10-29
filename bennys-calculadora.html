@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#09090b">
-  <title>Benny's Original Motor Works — Showroom Premium</title>
-  <meta name="description" content="Veículos exclusivos, serviços premium e performance extrema na Benny’s Original Motor Works.">
+  <title>Benny's Original Motor Works</title>
   <style>
     :root {
       color-scheme: dark;
@@ -188,150 +187,6 @@
       .quote-card { position: static; }
       .shell { padding: 18px 0; }
     }
-
-    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-    .topbar { box-shadow: 0 10px 35px #0005; }
-    .topbar-inner { min-height: 76px; }
-    .main-nav { display: flex; align-items: center; gap: 24px; margin-left: auto; }
-    .main-nav a { color: #a29fa6; font-size: 10px; font-weight: 850; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; transition: color .16s ease; }
-    .main-nav a:hover, .main-nav a:focus-visible { color: #fff; }
-    .brand-mark { width: 48px; height: 48px; border-color: #8d2636; background: linear-gradient(145deg,#861c30,#191116 72%); box-shadow: inset 0 0 22px #f12d4530,0 0 24px #f12d4518; }
-    .shell { width: min(1280px, calc(100% - 48px)); padding-top: 32px; }
-    .premium-hero { position: relative; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); overflow: hidden; margin-bottom: 32px; border: 1px solid #ffffff16; border-radius: 22px; background: radial-gradient(ellipse at 8% 0%,#8f1e321b,transparent 50%),linear-gradient(135deg,#151417,#0e0e11 72%); box-shadow: 0 25px 75px #0006,inset 0 1px 0 #ffffff0b; }
-    .hero-copy { align-self: center; padding: clamp(30px,5vw,66px); }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 16px; color: #ff6272; font-size: 9px; font-weight: 900; letter-spacing: .24em; text-transform: uppercase; }
-    .hero-eyebrow::before { width: 24px; height: 1px; background: var(--red); content: ""; }
-    .hero-title { max-width: 620px; margin: 0; color: #f5f3f5; font-size: clamp(34px,4.6vw,62px); font-weight: 950; font-style: italic; letter-spacing: -.055em; line-height: .98; text-transform: uppercase; }
-    .hero-title em { color: var(--red); font-style: inherit; text-shadow: 0 0 34px #f12d4525; }
-    .hero-description { max-width: 470px; margin: 18px 0 0; color: #aaa6ad; font-size: 13px; line-height: 1.8; }
-    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 26px; }
-    .hero-cta { min-height: 46px; padding: 0 18px; border-radius: 8px; box-shadow: 0 9px 28px #f12d4524; font-size: 10px; font-weight: 900; letter-spacing: .12em; text-decoration: none; }
-    .hero-cta span { margin-left: 7px; font-size: 16px; }
-    .hero-secondary { color: #b4afb7; font-size: 10px; font-weight: 850; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
-    .hero-secondary:hover { color: #fff; }
-    .hero-visual { position: relative; min-height: 340px; overflow: hidden; border-left: 1px solid #ffffff12; background: #151114; }
-    .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; filter: saturate(1.08) contrast(1.04); }
-    .hero-visual::after { position: absolute; inset: 0; background: linear-gradient(90deg,#0d0d10a8 0%,transparent 40%),linear-gradient(0deg,#09090be8 0%,transparent 58%),linear-gradient(135deg,#f12d4512,transparent 55%); content: ""; }
-    .hero-index, .hero-feature { position: absolute; z-index: 1; }
-    .hero-index { top: 20px; right: 20px; padding: 8px 10px; border: 1px solid #ffffff30; border-radius: 5px; color: #fff; background: #08080baa; font: 800 8px/1 "Segoe UI",sans-serif; letter-spacing: .18em; }
-    .hero-feature { right: 24px; bottom: 24px; left: 27px; display: grid; gap: 5px; }
-    .hero-feature span { color: #ff7481; font-size: 8px; font-weight: 900; letter-spacing: .22em; }
-    .hero-feature strong { color: #fff; font-size: 30px; font-style: italic; font-weight: 950; letter-spacing: -.04em; line-height: 1; }
-    .hero-feature small { color: #ded9df; font-size: 9px; font-weight: 850; letter-spacing: .13em; }
-    .hero-feature b { padding: 0 7px; color: var(--red); }
-    .hero-stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-top: 1px solid #ffffff12; background: #ffffff03; }
-    .hero-stat { display: grid; gap: 7px; padding: 17px 25px 18px; border-right: 1px solid #ffffff10; }
-    .hero-stat:last-child { border-right: 0; }
-    .hero-stat span { color: #77737c; font-size: 8px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
-    .hero-stat strong { color: #eeeaf0; font-size: 17px; font-weight: 950; letter-spacing: -.02em; }
-    .hero-stat em { color: var(--red); font-size: 10px; font-style: normal; }
-    .hero-stat strong small { color: #928c96; font-size: 8px; letter-spacing: .13em; }
-    .vehicle-section { padding: 20px; border: 1px solid #ffffff14; border-radius: 17px; background: linear-gradient(150deg,#141316ed,#101013ed); box-shadow: 0 18px 45px #0003,inset 0 1px 0 #ffffff08; }
-    .inventory-topline { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 4px; }
-    .inventory-kicker { margin-bottom: 8px; color: #ff6675; font-size: 8px; font-weight: 900; letter-spacing: .22em; text-transform: uppercase; }
-    .inventory-title { display: flex; align-items: center; gap: 10px; margin: 0; color: #f4f1f4; font-size: clamp(17px,2vw,21px); font-style: italic; font-weight: 950; letter-spacing: .045em; text-transform: uppercase; }
-    .inventory-title::before { width: 3px; height: 19px; border-radius: 9px; background: var(--red); box-shadow: 0 0 15px #f12d4570; content: ""; }
-    .inventory-description { margin: 7px 0 0; color: #87838c; font-size: 10px; }
-    .inventory-count { display: grid; justify-items: end; gap: 2px; flex: 0 0 auto; }
-    .inventory-count strong { color: #f3eff3; font-size: 24px; font-weight: 950; letter-spacing: -.06em; }
-    .inventory-count span { color: #77727b; font-size: 7px; font-weight: 900; letter-spacing: .18em; }
-    .inventory-controls { display: grid; grid-template-columns: minmax(0,1fr) 190px; gap: 9px; margin: 18px 0 13px; }
-    .inventory-search, .inventory-filter { display: flex; align-items: center; min-height: 40px; border: 1px solid #2b292e; border-radius: 8px; background: #0d0d10; }
-    .inventory-search { gap: 8px; padding: 0 12px; color: #74717a; }
-    .inventory-search span { font-size: 15px; }
-    .inventory-search input { width: 100%; border: 0; outline: 0; color: #efedf0; background: transparent; font: 500 10px/1.3 Inter,"Segoe UI",system-ui,sans-serif; }
-    .inventory-search input::placeholder { color: #6f6b74; }
-    .inventory-search:focus-within, .inventory-filter:focus-within { border-color: #87303c; box-shadow: 0 0 0 3px #f12d4512; }
-    .inventory-filter { width: 100%; padding: 0 11px; outline: none; color: #cbc7ce; font-size: 10px; }
-    .inventory-filter option { color: #f2f1f3; background: #151518; }
-    .vehicle-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
-    .vehicle-card { display: block; width: 100%; overflow: hidden; padding: 0; border: 1px solid #302d33; border-radius: 12px; color: var(--text); background: linear-gradient(145deg,#1a191d,#111114); box-shadow: 0 9px 25px #0003,inset 0 1px 0 #ffffff08; text-align: left; transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
-    .vehicle-card:hover { transform: translateY(-3px); border-color: #77414a; box-shadow: 0 18px 35px #0005,0 0 26px #f12d450b; }
-    .vehicle-card.is-selected { border-color: var(--red); box-shadow: 0 0 0 1px #f12d4550,0 14px 34px #0005; }
-    .vehicle-card:focus-visible { outline: 2px solid #ff6574; outline-offset: 3px; }
-    .vehicle-image-wrap { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; background: #1a181c; }
-    .vehicle-image-wrap::after { position: absolute; inset: 30% 0 0; background: linear-gradient(0deg,#09090bd9,transparent); content: ""; }
-    .vehicle-photo { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .35s ease; }
-    .vehicle-card:hover .vehicle-photo { transform: scale(1.035); }
-    .vehicle-tag, .vehicle-check { position: absolute; z-index: 1; top: 11px; }
-    .vehicle-tag { left: 11px; padding: 6px 8px; border: 1px solid #ffffff2b; border-radius: 4px; color: #f6f2f5; background: #09090bb8; font-size: 7px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase; backdrop-filter: blur(8px); }
-    .vehicle-check { right: 11px; display: grid; width: 25px; height: 25px; place-items: center; border: 1px solid #ffffff45; border-radius: 50%; color: transparent; background: #09090b85; font-size: 12px; font-weight: 950; }
-    .vehicle-card.is-selected .vehicle-check { border-color: var(--red); color: #fff; background: var(--red); }
-    .vehicle-details { display: grid; gap: 7px; padding: 13px 14px 14px; }
-    .vehicle-overline { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #85808a; font-size: 8px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
-    .vehicle-speed { color: #d3cdd5; font-size: 8px; font-weight: 900; letter-spacing: .1em; }
-    .vehicle-speed b { margin-right: 4px; color: var(--red); }
-    .vehicle-name { overflow: hidden; color: #f2eef3; font-size: 16px; font-style: italic; font-weight: 950; letter-spacing: -.025em; text-overflow: ellipsis; white-space: nowrap; }
-    .vehicle-identity { display: flex; align-items: center; justify-content: space-between; gap: 9px; padding-top: 3px; color: #74707a; font-size: 7px; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
-    .vehicle-identity code { overflow: hidden; color: #aaa4ad; font: 700 9px/1.2 "Cascadia Code",Consolas,monospace; letter-spacing: 0; text-overflow: ellipsis; text-transform: none; }
-    .vehicle-bottom { display: flex; align-items: end; justify-content: space-between; gap: 10px; margin-top: 5px; padding-top: 11px; border-top: 1px solid #ffffff12; }
-    .vehicle-price { display: grid; gap: 3px; }
-    .vehicle-price small { color: #77727c; font-size: 7px; font-weight: 900; letter-spacing: .17em; text-transform: uppercase; }
-    .vehicle-price strong { color: #ff6474; font-size: 20px; font-weight: 950; letter-spacing: -.05em; line-height: 1; }
-    .vehicle-action { display: inline-flex; align-items: center; gap: 7px; padding-bottom: 2px; color: #c9c3cb; font-size: 8px; font-weight: 950; letter-spacing: .11em; text-transform: uppercase; }
-    .vehicle-action b { color: var(--red); font-size: 15px; }
-    .vehicle-card.is-selected .vehicle-action { color: #ff7481; }
-    .inventory-note { margin: 12px 2px 0; color: #6f6b73; font-size: 8px; line-height: 1.6; }
-    .vehicle-empty { grid-column: 1 / -1; padding: 27px 15px; border: 1px dashed #39343b; border-radius: 10px; color: #85808a; font-size: 10px; text-align: center; }
-    .quote-card { border-color: #3a333b; box-shadow: 0 22px 58px #0006,inset 0 1px 0 #ffffff09; }
-    .quote-badge { padding: 6px 8px; border: 1px solid #f12d452c; border-radius: 5px; background: #f12d450c; }
-    .quote-item-price { color: #ff7582; }
-    @media (max-width: 1000px) {
-      .shell { width: min(100% - 32px, 920px); }
-      .main-nav { gap: 15px; }
-      .main-nav a { font-size: 9px; }
-      .premium-hero { grid-template-columns: minmax(0,1fr) minmax(0,.82fr); }
-      .hero-copy { padding: 36px; }
-      .hero-visual { min-height: 310px; }
-    }
-    @media (max-width: 760px) {
-      .topbar-inner, .shell { width: min(100% - 26px, 650px); }
-      .main-nav { display: none; }
-      .top-actions { margin-left: auto; }
-      .premium-hero { grid-template-columns: 1fr; }
-      .hero-copy { padding: 30px 26px 27px; }
-      .hero-visual { min-height: 255px; border-top: 1px solid #ffffff12; border-left: 0; }
-      .hero-stats { grid-template-columns: repeat(3,minmax(0,1fr)); }
-      .hero-stat { padding: 13px 12px; }
-      .hero-stat strong { font-size: 14px; }
-      .workspace { grid-template-columns: 1fr; }
-      .vehicle-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .inventory-controls { grid-template-columns: minmax(0,1fr) 165px; }
-      .quote-card { position: static; }
-    }
-    @media (max-width: 480px) {
-      .shell { width: calc(100% - 22px); padding-top: 16px; }
-      .premium-hero { margin-bottom: 20px; border-radius: 16px; }
-      .hero-copy { padding: 26px 20px 22px; }
-      .hero-title { font-size: clamp(34px,10vw,45px); }
-      .hero-description { margin-top: 13px; font-size: 11px; }
-      .hero-actions { margin-top: 19px; gap: 12px; }
-      .hero-visual { min-height: 220px; }
-      .hero-feature { bottom: 18px; left: 19px; }
-      .hero-feature strong { font-size: 24px; }
-      .hero-stats { grid-template-columns: 1fr; }
-      .hero-stat { grid-template-columns: 1fr auto; align-items: center; padding: 10px 15px; border-right: 0; border-bottom: 1px solid #ffffff10; }
-      .hero-stat:last-child { border-bottom: 0; }
-      .hero-stat strong { font-size: 13px; }
-      .vehicle-section { padding: 14px; border-radius: 14px; }
-      .inventory-controls { grid-template-columns: 1fr; gap: 7px; margin-top: 13px; }
-      .inventory-filter { min-height: 38px; }
-      .vehicle-grid { grid-template-columns: 1fr; gap: 9px; }
-      .vehicle-card { display: grid; grid-template-columns: 39% 1fr; min-height: 144px; }
-      .vehicle-image-wrap { height: 100%; min-height: 144px; aspect-ratio: auto; }
-      .vehicle-details { align-content: center; gap: 5px; padding: 10px 11px; }
-      .vehicle-overline { align-items: flex-start; flex-direction: column; gap: 4px; font-size: 7px; }
-      .vehicle-speed { font-size: 7px; }
-      .vehicle-name { font-size: 13px; }
-      .vehicle-identity { padding-top: 0; font-size: 6px; }
-      .vehicle-identity code { font-size: 8px; }
-      .vehicle-bottom { margin-top: 2px; padding-top: 7px; }
-      .vehicle-price strong { font-size: 17px; }
-      .vehicle-action { gap: 4px; font-size: 7px; }
-      .vehicle-tag { top: 7px; left: 7px; padding: 5px 6px; font-size: 6px; }
-      .vehicle-check { top: 7px; right: 7px; width: 21px; height: 21px; }
-      .inventory-count strong { font-size: 20px; }
-    }
   </style>
 </head>
 <body>
@@ -344,7 +199,6 @@
           <p class="brand-subtitle">Customização premium · Performance extrema</p>
         </div>
       </div>
-      <nav class="main-nav" aria-label="Navegação principal"><a href="#vehicles">Veículos</a><a href="#services">Serviços</a><a href="#quoteTitle">Orçamento</a></nav>
       <div class="top-actions">
         <div class="top-total"><span class="top-total-label">TOTAL</span><strong class="top-total-value" id="topTotal">R$ 0</strong></div>
         <button class="button" type="button" id="topReset" title="Resetar orçamento"><span class="button-icon">↺</span> Resetar</button>
@@ -353,55 +207,9 @@
   </header>
 
   <main class="shell">
-
-    <section class="premium-hero" aria-labelledby="heroTitle">
-      <div class="hero-copy">
-        <span class="hero-eyebrow">BENNY'S · SHOWROOM EXCLUSIVO</span>
-        <h2 class="hero-title" id="heroTitle">Máquinas de respeito. <em>Presença sem igual.</em></h2>
-        <p class="hero-description">Uma seleção especial para quem sabe que cada detalhe faz diferença. Escolha sua próxima máquina e monte seu orçamento em poucos cliques.</p>
-        <div class="hero-actions">
-          <a class="button primary hero-cta" href="#vehicles">EXPLORAR VEÍCULOS <span aria-hidden="true">↗</span></a>
-          <a class="hero-secondary" href="#services">Conhecer a oficina</a>
-        </div>
-      </div>
-      <div class="hero-visual" role="img" aria-label="Ferrari 488 Pista em destaque na Benny's">
-        <img src="/assets/cars/ferrari-488-pista.jpg" alt="" fetchpriority="high">
-        <span class="hero-index">CAPA · 01 / 04</span>
-        <div class="hero-feature"><span>DESTAQUE DA CASA</span><strong>488 PISTA</strong><small>250 KM/H <b>·</b> 20KK</small></div>
-      </div>
-      <div class="hero-stats" aria-label="Resumo da garagem">
-        <div class="hero-stat"><span>FROTA SELECIONADA</span><strong>04 <small>MODELOS</small></strong></div>
-        <div class="hero-stat"><span>VELOCIDADE MÁXIMA</span><strong>270 <small>KM/H</small></strong></div>
-        <div class="hero-stat"><span>VALORES A PARTIR DE</span><strong>15 <em>KK</em></strong></div>
-      </div>
-    </section>
     <div class="workspace">
       <div class="catalog">
-
-        <section class="vehicle-section" id="vehicles" aria-labelledby="vehiclesTitle">
-          <div class="inventory-topline">
-            <div>
-              <div class="inventory-kicker">ESTOQUE SELECIONADO · 04 MODELOS</div>
-              <h2 class="inventory-title" id="vehiclesTitle">Garagem premium</h2>
-              <p class="inventory-description">Máquinas exclusivas, prontas para assumir a rua.</p>
-            </div>
-            <div class="inventory-count"><strong>04</strong><span>VEÍCULOS</span></div>
-          </div>
-          <div class="inventory-controls">
-            <label class="inventory-search" for="vehicleSearch"><span aria-hidden="true">⌕</span><input id="vehicleSearch" type="search" autocomplete="off" placeholder="Buscar veículo ou nome de garagem"></label>
-            <select class="inventory-filter" id="vehicleFilter" aria-label="Filtrar veículos por categoria">
-              <option value="all">Todas as categorias</option>
-              <option value="supercarro">Supercarros</option>
-              <option value="jdm">JDM</option>
-              <option value="eletrico">Elétricos</option>
-              <option value="muscle">Muscle</option>
-            </select>
-          </div>
-          <div class="vehicle-grid" id="vehicleCards" aria-live="polite"></div>
-          <p class="inventory-note">Selecione um veículo para adicioná-lo ao orçamento. Os nomes de garagem são os códigos usados para spawn no servidor.</p>
-        </section>
-
-        <section class="service-section" id="services">
+        <section class="service-section">
           <div class="section-heading"><span class="section-icon">⚒</span><h2>Reparos</h2><span class="section-rule"></span></div>
           <div class="service-grid two" id="repairCards"></div>
         </section>
@@ -522,15 +330,8 @@
         { id: 'tires', name: 'Pneus', price: 15000 },
         { id: 'suspension-control', name: 'Controle de suspensão', price: 5000000 }
       ];
-
-      const vehicleItems = [
-        { id: 'vehicle-ferrari-488-pista', make: 'Ferrari', name: '488 Pista', category: 'supercarro', categoryLabel: 'Supercarro', model: '488pista', topSpeed: 250, price: 20000000, priceLabel: '20KK', quoteName: 'Ferrari 488 Pista · 488pista', image: '/assets/cars/ferrari-488-pista.jpg', alt: 'Ferrari 488 Pista amarela na frente da Benny’s' },
-        { id: 'vehicle-civic-ek9', make: 'Honda', name: 'Civic EK9', category: 'jdm', categoryLabel: 'JDM', model: 'civicek9', topSpeed: 180, price: 15000000, priceLabel: '15KK', quoteName: 'Honda Civic EK9 · civicek9', image: '/assets/cars/civic-ek9.jpg', alt: 'Honda Civic EK9 cinza na frente da Benny’s' },
-        { id: 'vehicle-tesla-raiden', make: 'Tesla', name: 'Raiden', category: 'eletrico', categoryLabel: 'Elétrico', model: 'rrraidenwideTesla', topSpeed: 260, price: 20000000, priceLabel: '20KK', quoteName: 'Tesla Raiden · rrraidenwideTesla', image: '/assets/cars/tesla-raiden.jpg', alt: 'Tesla Raiden preto na frente da Benny’s' },
-        { id: 'vehicle-mustang', make: 'Ford', name: 'Mustang', category: 'muscle', categoryLabel: 'Muscle', model: 'rrgt50e', topSpeed: 270, price: 15000000, priceLabel: '15KK', quoteName: 'Ford Mustang · rrgt50e', image: '/assets/cars/mustang-rrgt50e.jpg', alt: 'Ford Mustang azul na frente da Benny’s' }
-      ];
       const serviceById = {};
-      [...repairItems, ...aestheticItems, ...fixedExtras, ...vehicleItems].forEach(item => serviceById[item.id] = item);
+      [...repairItems, ...aestheticItems, ...fixedExtras].forEach(item => serviceById[item.id] = item);
       let selected = {};
 
       const money = value => 'R$ ' + new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(Math.max(0, Number(value) || 0));
@@ -542,31 +343,6 @@
           '<span class="service-price">' + money(item.price) + '</span>' +
           '<span class="checkmark" aria-hidden="true">✓</span></button>';
       };
-
-      const vehicleCardHTML = vehicle => {
-        const active = Boolean(selected[vehicle.id]);
-        const action = active ? 'ADICIONADO' : 'ADICIONAR';
-        return '<button class="vehicle-card' + (active ? ' is-selected' : '') + '" type="button" data-toggle="' + escapeHTML(vehicle.id) + '" aria-pressed="' + active + '" aria-label="' + (active ? 'Remover ' : 'Adicionar ') + escapeHTML(vehicle.make + ' ' + vehicle.name) + ' ao orçamento">' +
-          '<span class="vehicle-image-wrap"><img class="vehicle-photo" src="' + escapeHTML(vehicle.image) + '" alt="' + escapeHTML(vehicle.alt) + '" loading="lazy" decoding="async"><span class="vehicle-tag">' + escapeHTML(vehicle.categoryLabel) + '</span><span class="vehicle-check" aria-hidden="true">✓</span></span>' +
-          '<span class="vehicle-details"><span class="vehicle-overline"><span>' + escapeHTML(vehicle.make) + '</span><span class="vehicle-speed"><b aria-hidden="true">↗</b>' + vehicle.topSpeed + ' KM/H</span></span>' +
-          '<strong class="vehicle-name">' + escapeHTML(vehicle.name) + '</strong>' +
-          '<span class="vehicle-identity"><span>Nome na garagem</span><code>' + escapeHTML(vehicle.model) + '</code></span>' +
-          '<span class="vehicle-bottom"><span class="vehicle-price"><small>Valor do veículo</small><strong>' + escapeHTML(vehicle.priceLabel) + '</strong></span><span class="vehicle-action">' + action + ' <b aria-hidden="true">' + (active ? '✓' : '+') + '</b></span></span></span></button>';
-      };
-      const renderVehicleCards = () => {
-        const container = document.getElementById('vehicleCards');
-        if (!container) return;
-        const query = document.getElementById('vehicleSearch').value.trim().toLocaleLowerCase('pt-BR');
-        const category = document.getElementById('vehicleFilter').value;
-        const filtered = vehicleItems.filter(vehicle => {
-          const matchesCategory = category === 'all' || vehicle.category === category;
-          const searchable = [vehicle.make, vehicle.name, vehicle.model, vehicle.categoryLabel].join(' ').toLocaleLowerCase('pt-BR');
-          return matchesCategory && searchable.includes(query);
-        });
-        container.innerHTML = filtered.length
-          ? filtered.map(vehicleCardHTML).join('')
-          : '<div class="vehicle-empty">Nenhum veículo encontrado. Tente outro nome ou categoria.</div>';
-      };
       const renderCards = () => {
         document.getElementById('repairCards').innerHTML = repairItems.map(cardHTML).join('');
         document.getElementById('aestheticCards').innerHTML = aestheticItems.map(cardHTML).join('');
@@ -574,7 +350,6 @@
         document.getElementById('armorExtras').innerHTML = cardHTML(fixedExtras[1]);
         document.getElementById('packageCards').innerHTML = cardHTML(fixedExtras[2]);
         document.getElementById('saleCards').innerHTML = fixedExtras.slice(3).map(cardHTML).join('');
-        renderVehicleCards();
       };
       const selectHTML = (id, name, levels, emptyName) => {
         const options = ['<option value="0">' + emptyName + '</option>'].concat(levels.map((price, index) =>
@@ -615,7 +390,7 @@
           content.innerHTML = '<div class="empty-quote"><span class="empty-quote-icon">♧</span><p>Nenhum serviço selecionado</p></div>';
         } else {
           content.innerHTML = '<ul class="quote-list">' + items.map(item =>
-            '<li class="quote-item"><span class="quote-item-name">' + escapeHTML(item.quoteName || item.name) + '</span><span class="quote-item-price">' + escapeHTML(item.priceLabel || money(item.price)) + '</span></li>'
+            '<li class="quote-item"><span class="quote-item-name">' + escapeHTML(item.name) + '</span><span class="quote-item-price">' + money(item.price) + '</span></li>'
           ).join('') + '</ul>';
         }
         document.getElementById('topTotal').textContent = money(total);
@@ -645,7 +420,7 @@
         const items = getSelectedItems();
         if (!items.length) return;
         const total = items.reduce((sum, item) => sum + item.price, 0);
-        const text = ["BENNY'S ORIGINAL MOTOR WORKS", 'ORÇAMENTO', '', ...items.map(item => '• ' + (item.quoteName || item.name) + ' — ' + (item.priceLabel || money(item.price))), '', 'TOTAL ESTIMADO: ' + money(total)].join('\n');
+        const text = ["BENNY'S ORIGINAL MOTOR WORKS", 'ORÇAMENTO', '', ...items.map(item => '• ' + item.name + ' — ' + money(item.price)), '', 'TOTAL ESTIMADO: ' + money(total)].join('\n');
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(text);
           else throw new Error('clipboard indisponível');
@@ -684,8 +459,6 @@
           renderSummary();
         }
       });
-      document.getElementById('vehicleSearch').addEventListener('input', renderVehicleCards);
-      document.getElementById('vehicleFilter').addEventListener('change', renderVehicleCards);
       ['topReset', 'summaryReset', 'mobileReset'].forEach(id => document.getElementById(id).addEventListener('click', resetQuote));
       ['copyQuote', 'mobileCopy'].forEach(id => document.getElementById(id).addEventListener('click', copyQuote));
     })();
