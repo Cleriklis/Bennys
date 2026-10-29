@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090b">
+  <title>Benny's Original Motor Works — Showroom Premium</title>
+  <meta name="description" content="Veículos exclusivos, serviços premium e performance extrema na Benny’s Original Motor Works.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09090b;
+      --surface: #121215;
+      --card: #17171b;
+      --line: #29292f;
+      --muted: #81818a;
+      --text: #f2f1f3;
+      --red: #f12d45;
+      --red-soft: #ff5264;
+      --radius: 13px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text);
+      background:
+        radial-gradient(ellipse at 4% 28%, #22111455 0, transparent 35%),
+        radial-gradient(ellipse at 90% 58%, #1b101455 0, transparent 32%),
+        var(--bg);
+      font: 14px/1.45 Inter, "Segoe UI", system-ui, sans-serif;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+    .topbar {
+      position: sticky; top: 0; z-index: 5; border-bottom: 1px solid #242428;
+      background: #0c0c0eed; backdrop-filter: blur(16px);
+    }
+    .topbar-inner {
+      width: min(1200px, calc(100% - 40px)); min-height: 82px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .brand-mark {
+      display: grid; place-items: center; flex: 0 0 auto; width: 43px; height: 43px;
+      border: 1px solid #65303a; border-radius: 9px;
+      color: #fff; background: linear-gradient(145deg, #591e2a, #171116);
+      font-size: 12px; font-weight: 950; font-style: italic; letter-spacing: -.08em;
+      box-shadow: inset 0 0 18px #f12d4520;
+    }
+    .brand-name { margin: 0; overflow: hidden; color: #f3f1f3; font-size: clamp(14px, 2vw, 20px); font-weight: 950; font-style: italic; letter-spacing: .015em; text-overflow: ellipsis; white-space: nowrap; }
+    .brand-name em { color: var(--red); font-style: inherit; }
+    .brand-subtitle { margin: 3px 0 0; color: #77767d; font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .top-actions { display: flex; align-items: center; gap: 18px; }
+    .top-total { text-align: right; }
+    .top-total-label { display: block; color: #77767d; font-size: 9px; font-weight: 800; letter-spacing: .19em; }
+    .top-total-value { display: block; margin-top: 1px; color: var(--red); font-size: 18px; font-weight: 900; font-variant-numeric: tabular-nums; }
+    .button {
+      min-height: 39px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 0 15px; border: 1px solid #303035; border-radius: 999px;
+      color: #aaa9af; background: #151518; font-size: 12px; font-weight: 750;
+      transition: .16s ease;
+    }
+    .button:hover { color: #fff; border-color: #55545b; background: #202024; }
+    .button:disabled { color: #59585e; border-color: #242428; background: #1a1a1d; cursor: not-allowed; }
+    .button.primary { border-color: var(--red); color: #fff; background: var(--red); }
+    .button.primary:hover:not(:disabled) { border-color: var(--red-soft); background: var(--red-soft); }
+    .shell { width: min(1200px, calc(100% - 40px)); margin: 0 auto; padding: 30px 0 56px; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 350px; align-items: start; gap: 23px; }
+    .catalog { display: grid; gap: 28px; min-width: 0; }
+    .section-heading { display: flex; align-items: center; gap: 11px; margin: 0 0 14px; }
+    .section-icon { display: grid; place-items: center; width: 20px; height: 20px; color: var(--red); font-size: 18px; font-weight: 800; }
+    .section-heading h2 { margin: 0; flex: 0 0 auto; color: #f0eef1; font-size: 15px; font-weight: 900; font-style: italic; letter-spacing: .06em; text-transform: uppercase; }
+    .section-rule { width: 100%; height: 1px; background: linear-gradient(90deg, #4a252b, #26252a 72%, transparent); }
+    .service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .service-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .service-card {
+      position: relative; min-height: 77px; width: 100%; padding: 13px 42px 12px 15px;
+      border: 1px solid #2a2a30; border-radius: var(--radius); color: var(--text);
+      background: linear-gradient(135deg, #17171aee, #121215ee);
+      box-shadow: 0 8px 18px #0002; text-align: left; transition: .15s ease;
+    }
+    .service-card:hover { border-color: #5d3038; background: #1c171a; transform: translateY(-1px); }
+    .service-card.selected { border-color: #a62739; background: linear-gradient(135deg, #26171b, #191518); box-shadow: inset 0 0 0 1px #f12d4520, 0 8px 20px #0003; }
+    .service-name { display: block; overflow: hidden; color: #e8e6e9; font-size: 12px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+    .service-price { display: block; margin-top: 6px; color: #99979f; font-size: 10px; font-weight: 800; letter-spacing: .09em; font-variant-numeric: tabular-nums; }
+    .service-card.selected .service-price { color: #ff7683; }
+    .checkmark {
+      position: absolute; top: 50%; right: 13px; width: 19px; height: 19px; display: grid; place-items: center;
+      transform: translateY(-50%); border: 2px solid #45444b; border-radius: 50%; color: transparent;
+      font-size: 11px; font-weight: 900; transition: .15s ease;
+    }
+    .service-card.selected .checkmark { border-color: var(--red); color: white; background: var(--red); }
+    .performance-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .upgrade-card {
+      min-width: 0; padding: 12px 14px 11px; border: 1px solid #2a2a30; border-radius: var(--radius);
+      background: linear-gradient(135deg, #17171aee, #121215ee); transition: .15s ease;
+    }
+    .upgrade-card.active { border-color: #a62739; background: linear-gradient(135deg, #26171b, #191518); }
+    .upgrade-label { display: block; margin-bottom: 8px; color: #c9c7cc; font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .upgrade-select {
+      width: 100%; min-height: 38px; padding: 0 10px; border: 1px solid #33333a; border-radius: 8px;
+      outline: none; color: #e7e5e9; background: #111114; font-size: 11px; font-weight: 650;
+    }
+    .upgrade-select:focus { border-color: #b42c3e; box-shadow: 0 0 0 3px #f12d4519; }
+    .upgrade-select option { color: #f2f1f3; background: #151518; }
+    .performance-extras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+    .quote-card { position: sticky; top: 102px; overflow: hidden; border: 1px solid #302f35; border-radius: 17px; background: #111114ed; box-shadow: 0 22px 55px #0005; }
+    .quote-head { display: flex; align-items: center; justify-content: space-between; min-height: 59px; padding: 0 20px; border-bottom: 1px solid #2a292e; }
+    .quote-head h2 { margin: 0; font-size: 13px; font-weight: 900; text-transform: uppercase; }
+    .quote-badge { color: var(--red); font-size: 9px; font-weight: 950; letter-spacing: .16em; text-transform: uppercase; }
+    .quote-content { min-height: 195px; padding: 18px 20px; }
+    .empty-quote { min-height: 150px; display: grid; align-content: center; justify-items: center; gap: 9px; color: #6e6d74; text-align: center; }
+    .empty-quote-icon { color: #3d3c43; font-size: 27px; }
+    .empty-quote p { margin: 0; font-size: 11px; font-style: italic; }
+    .quote-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+    .quote-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #252429; }
+    .quote-item-name { min-width: 0; overflow: hidden; color: #c9c7cc; font-size: 11px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+    .quote-item-price { flex: 0 0 auto; color: #e9e6e9; font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .quote-bottom { padding: 15px 20px 18px; border-top: 1px solid #29282e; }
+    .quote-total-row { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+    .quote-total-label { color: #85838b; font-size: 9px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .quote-total-value { margin-top: 2px; color: #f3f1f4; font-size: 37px; font-weight: 950; letter-spacing: -.055em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .quote-total-currency { padding-bottom: 3px; color: var(--red); font-size: 13px; font-weight: 900; }
+    .quote-actions { display: grid; gap: 7px; margin-top: 20px; }
+    .quote-actions .button { width: 100%; border-radius: 9px; min-height: 44px; text-transform: uppercase; letter-spacing: .09em; }
+    .quote-actions .button.reset { min-height: 36px; border-color: transparent; color: #89878e; background: transparent; }
+    .quote-actions .button.reset:hover { color: #f1eff2; background: #1a191e; }
+    .footer { margin-top: 18px; padding: 0 8px; color: #626169; font-size: 8px; font-weight: 750; letter-spacing: .13em; text-align: center; text-transform: uppercase; }
+    .footer span { display: block; margin-top: 4px; color: #4f4e55; font-size: 7px; letter-spacing: .17em; }
+    .mobile-bar { display: none; }
+    .toast { position: fixed; right: 20px; bottom: 20px; z-index: 10; padding: 11px 15px; border: 1px solid #45444a; border-radius: 9px; color: #fff; background: #1c1b20; box-shadow: 0 12px 30px #0008; opacity: 0; transform: translateY(8px); pointer-events: none; transition: .2s ease; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 1000px) {
+      .workspace { grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; }
+      .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .topbar-inner, .shell { width: min(100% - 26px, 650px); }
+      .topbar-inner { min-height: 70px; }
+      .workspace { grid-template-columns: 1fr; }
+      .quote-card { position: static; }
+      .catalog { gap: 23px; }
+      .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mobile-bar {
+        position: fixed; right: 0; bottom: 0; left: 0; z-index: 8;
+        display: flex; align-items: center; gap: 9px; padding: 11px max(13px, env(safe-area-inset-right)) calc(11px + env(safe-area-inset-bottom)) max(13px, env(safe-area-inset-left));
+        border-top: 1px solid #333137; background: #111114f5; backdrop-filter: blur(15px);
+      }
+      .mobile-total { min-width: 0; flex: 1; }
+      .mobile-total small { display: block; color: #89878e; font-size: 8px; font-weight: 850; letter-spacing: .14em; }
+      .mobile-total strong { display: block; margin-top: 1px; color: var(--red); font-size: 19px; font-weight: 950; font-variant-numeric: tabular-nums; }
+      .mobile-bar .button { min-height: 40px; padding: 0 12px; border-radius: 9px; }
+      .shell { padding-bottom: 98px; }
+      .quote-actions { display: none; }
+    }
+    @media (max-width: 480px) {
+      .topbar-inner, .shell { width: calc(100% - 22px); }
+      .brand { gap: 9px; }
+      .brand-mark { width: 37px; height: 37px; }
+      .brand-subtitle { font-size: 7px; }
+      .top-actions { gap: 9px; }
+      .top-total-value { font-size: 15px; }
+      .top-actions .button { width: 38px; min-height: 38px; padding: 0; font-size: 0; }
+      .top-actions .button .button-icon { font-size: 13px; }
+      .performance-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+      .upgrade-card { padding: 10px 9px; }
+      .upgrade-label { font-size: 9px; }
+      .upgrade-select { padding: 0 6px; font-size: 10px; }
+      .performance-extras { grid-template-columns: 1fr 1fr; gap: 7px; }
+      .service-card { min-height: 70px; padding: 11px 32px 10px 11px; }
+      .service-name { font-size: 11px; }
+      .service-price { font-size: 9px; }
+      .checkmark { right: 9px; width: 16px; height: 16px; }
+      .quote-content { padding-right: 15px; padding-left: 15px; }
+      .quote-head, .quote-bottom { padding-right: 15px; padding-left: 15px; }
+      .quote-total-value { font-size: 32px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { color: #151515; background: #fff; }
+      .topbar { position: static; background: #fff; border-color: #aaa; }
+      .topbar-inner, .shell { width: 100%; }
+      .brand-name, .section-heading h2, .service-name, .upgrade-label, .quote-head h2, .quote-item-name, .quote-item-price, .quote-total-value { color: #111; }
+      .brand-subtitle, .service-price, .quote-total-label, .footer { color: #555; }
+      .workspace { grid-template-columns: 1fr 300px; }
+      .quote-card, .service-card, .upgrade-card { color: #111; background: #fff; box-shadow: none; border-color: #bbb; }
+      .service-card.selected, .upgrade-card.active { background: #fff1f2; }
+      .mobile-bar, .top-actions .button, .quote-actions, .toast { display: none !important; }
+      .quote-card { position: static; }
+      .shell { padding: 18px 0; }
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    .topbar { box-shadow: 0 10px 35px #0005; }
+    .topbar-inner { min-height: 76px; }
+    .main-nav { display: flex; align-items: center; gap: 24px; margin-left: auto; }
+    .main-nav a { color: #a29fa6; font-size: 10px; font-weight: 850; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; transition: color .16s ease; }
+    .main-nav a:hover, .main-nav a:focus-visible { color: #fff; }
+    .brand-mark { width: 48px; height: 48px; border-color: #8d2636; background: linear-gradient(145deg,#861c30,#191116 72%); box-shadow: inset 0 0 22px #f12d4530,0 0 24px #f12d4518; }
+    .shell { width: min(1280px, calc(100% - 48px)); padding-top: 32px; }
+    .premium-hero { position: relative; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); overflow: hidden; margin-bottom: 32px; border: 1px solid #ffffff16; border-radius: 22px; background: radial-gradient(ellipse at 8% 0%,#8f1e321b,transparent 50%),linear-gradient(135deg,#151417,#0e0e11 72%); box-shadow: 0 25px 75px #0006,inset 0 1px 0 #ffffff0b; }
+    .hero-copy { align-self: center; padding: clamp(30px,5vw,66px); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 16px; color: #ff6272; font-size: 9px; font-weight: 900; letter-spacing: .24em; text-transform: uppercase; }
+    .hero-eyebrow::before { width: 24px; height: 1px; background: var(--red); content: ""; }
+    .hero-title { max-width: 620px; margin: 0; color: #f5f3f5; font-size: clamp(34px,4.6vw,62px); font-weight: 950; font-style: italic; letter-spacing: -.055em; line-height: .98; text-transform: uppercase; }
+    .hero-title em { color: var(--red); font-style: inherit; text-shadow: 0 0 34px #f12d4525; }
+    .hero-description { max-width: 470px; margin: 18px 0 0; color: #aaa6ad; font-size: 13px; line-height: 1.8; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 26px; }
+    .hero-cta { min-height: 46px; padding: 0 18px; border-radius: 8px; box-shadow: 0 9px 28px #f12d4524; font-size: 10px; font-weight: 900; letter-spacing: .12em; text-decoration: none; }
+    .hero-cta span { margin-left: 7px; font-size: 16px; }
+    .hero-secondary { color: #b4afb7; font-size: 10px; font-weight: 850; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+    .hero-secondary:hover { color: #fff; }
+    .hero-visual { position: relative; min-height: 340px; overflow: hidden; border-left: 1px solid #ffffff12; background: #151114; }
+    .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; filter: saturate(1.08) contrast(1.04); }
+    .hero-visual::after { position: absolute; inset: 0; background: linear-gradient(90deg,#0d0d10a8 0%,transparent 40%),linear-gradient(0deg,#09090be8 0%,transparent 58%),linear-gradient(135deg,#f12d4512,transparent 55%); content: ""; }
+    .hero-index, .hero-feature { position: absolute; z-index: 1; }
+    .hero-index { top: 20px; right: 20px; padding: 8px 10px; border: 1px solid #ffffff30; border-radius: 5px; color: #fff; background: #08080baa; font: 800 8px/1 "Segoe UI",sans-serif; letter-spacing: .18em; }
+    .hero-feature { right: 24px; bottom: 24px; left: 27px; display: grid; gap: 5px; }
+    .hero-feature span { color: #ff7481; font-size: 8px; font-weight: 900; letter-spacing: .22em; }
+    .hero-feature strong { color: #fff; font-size: 30px; font-style: italic; font-weight: 950; letter-spacing: -.04em; line-height: 1; }
+    .hero-feature small { color: #ded9df; font-size: 9px; font-weight: 850; letter-spacing: .13em; }
+    .hero-feature b { padding: 0 7px; color: var(--red); }
+    .hero-stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-top: 1px solid #ffffff12; background: #ffffff03; }
+    .hero-stat { display: grid; gap: 7px; padding: 17px 25px 18px; border-right: 1px solid #ffffff10; }
+    .hero-stat:last-child { border-right: 0; }
+    .hero-stat span { color: #77737c; font-size: 8px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+    .hero-stat strong { color: #eeeaf0; font-size: 17px; font-weight: 950; letter-spacing: -.02em; }
+    .hero-stat em { color: var(--red); font-size: 10px; font-style: normal; }
+    .hero-stat strong small { color: #928c96; font-size: 8px; letter-spacing: .13em; }
+    .vehicle-section { padding: 20px; border: 1px solid #ffffff14; border-radius: 17px; background: linear-gradient(150deg,#141316ed,#101013ed); box-shadow: 0 18px 45px #0003,inset 0 1px 0 #ffffff08; }
+    .inventory-topline { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 4px; }
+    .inventory-kicker { margin-bottom: 8px; color: #ff6675; font-size: 8px; font-weight: 900; letter-spacing: .22em; text-transform: uppercase; }
+    .inventory-title { display: flex; align-items: center; gap: 10px; margin: 0; color: #f4f1f4; font-size: clamp(17px,2vw,21px); font-style: italic; font-weight: 950; letter-spacing: .045em; text-transform: uppercase; }
+    .inventory-title::before { width: 3px; height: 19px; border-radius: 9px; background: var(--red); box-shadow: 0 0 15px #f12d4570; content: ""; }
+    .inventory-description { margin: 7px 0 0; color: #87838c; font-size: 10px; }
+    .inventory-count { display: grid; justify-items: end; gap: 2px; flex: 0 0 auto; }
+    .inventory-count strong { color: #f3eff3; font-size: 24px; font-weight: 950; letter-spacing: -.06em; }
+    .inventory-count span { color: #77727b; font-size: 7px; font-weight: 900; letter-spacing: .18em; }
+    .inventory-controls { display: grid; grid-template-columns: minmax(0,1fr) 190px; gap: 9px; margin: 18px 0 13px; }
+    .inventory-search, .inventory-filter { display: flex; align-items: center; min-height: 40px; border: 1px solid #2b292e; border-radius: 8px; background: #0d0d10; }
+    .inventory-search { gap: 8px; padding: 0 12px; color: #74717a; }
+    .inventory-search span { font-size: 15px; }
+    .inventory-search input { width: 100%; border: 0; outline: 0; color: #efedf0; background: transparent; font: 500 10px/1.3 Inter,"Segoe UI",system-ui,sans-serif; }
+    .inventory-search input::placeholder { color: #6f6b74; }
+    .inventory-search:focus-within, .inventory-filter:focus-within { border-color: #87303c; box-shadow: 0 0 0 3px #f12d4512; }
+    .inventory-filter { width: 100%; padding: 0 11px; outline: none; color: #cbc7ce; font-size: 10px; }
+    .inventory-filter option { color: #f2f1f3; background: #151518; }
+    .vehicle-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .vehicle-card { display: block; width: 100%; overflow: hidden; padding: 0; border: 1px solid #302d33; border-radius: 12px; color: var(--text); background: linear-gradient(145deg,#1a191d,#111114); box-shadow: 0 9px 25px #0003,inset 0 1px 0 #ffffff08; text-align: left; transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    .vehicle-card:hover { transform: translateY(-3px); border-color: #77414a; box-shadow: 0 18px 35px #0005,0 0 26px #f12d450b; }
+    .vehicle-card.is-selected { border-color: var(--red); box-shadow: 0 0 0 1px #f12d4550,0 14px 34px #0005; }
+    .vehicle-card:focus-visible { outline: 2px solid #ff6574; outline-offset: 3px; }
+    .vehicle-image-wrap { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; background: #1a181c; }
+    .vehicle-image-wrap::after { position: absolute; inset: 30% 0 0; background: linear-gradient(0deg,#09090bd9,transparent); content: ""; }
+    .vehicle-photo { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .35s ease; }
+    .vehicle-card:hover .vehicle-photo { transform: scale(1.035); }
+    .vehicle-tag, .vehicle-check { position: absolute; z-index: 1; top: 11px; }
+    .vehicle-tag { left: 11px; padding: 6px 8px; border: 1px solid #ffffff2b; border-radius: 4px; color: #f6f2f5; background: #09090bb8; font-size: 7px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase; backdrop-filter: blur(8px); }
+    .vehicle-check { right: 11px; display: grid; width: 25px; height: 25px; place-items: center; border: 1px solid #ffffff45; border-radius: 50%; color: transparent; background: #09090b85; font-size: 12px; font-weight: 950; }
+    .vehicle-card.is-selected .vehicle-check { border-color: var(--red); color: #fff; background: var(--red); }
+    .vehicle-details { display: grid; gap: 7px; padding: 13px 14px 14px; }
+    .vehicle-overline { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #85808a; font-size: 8px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .vehicle-speed { color: #d3cdd5; font-size: 8px; font-weight: 900; letter-spacing: .1em; }
+    .vehicle-speed b { margin-right: 4px; color: var(--red); }
+    .vehicle-name { overflow: hidden; color: #f2eef3; font-size: 16px; font-style: italic; font-weight: 950; letter-spacing: -.025em; text-overflow: ellipsis; white-space: nowrap; }
+    .vehicle-identity { display: flex; align-items: center; justify-content: space-between; gap: 9px; padding-top: 3px; color: #74707a; font-size: 7px; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .vehicle-identity code { overflow: hidden; color: #aaa4ad; font: 700 9px/1.2 "Cascadia Code",Consolas,monospace; letter-spacing: 0; text-overflow: ellipsis; text-transform: none; }
+    .vehicle-bottom { display: flex; align-items: end; justify-content: space-between; gap: 10px; margin-top: 5px; padding-top: 11px; border-top: 1px solid #ffffff12; }
+    .vehicle-price { display: grid; gap: 3px; }
+    .vehicle-price small { color: #77727c; font-size: 7px; font-weight: 900; letter-spacing: .17em; text-transform: uppercase; }
+    .vehicle-price strong { color: #ff6474; font-size: 20px; font-weight: 950; letter-spacing: -.05em; line-height: 1; }
+    .vehicle-action { display: inline-flex; align-items: center; gap: 7px; padding-bottom: 2px; color: #c9c3cb; font-size: 8px; font-weight: 950; letter-spacing: .11em; text-transform: uppercase; }
+    .vehicle-action b { color: var(--red); font-size: 15px; }
+    .vehicle-card.is-selected .vehicle-action { color: #ff7481; }
+    .inventory-note { margin: 12px 2px 0; color: #6f6b73; font-size: 8px; line-height: 1.6; }
+    .vehicle-empty { grid-column: 1 / -1; padding: 27px 15px; border: 1px dashed #39343b; border-radius: 10px; color: #85808a; font-size: 10px; text-align: center; }
+    .quote-card { border-color: #3a333b; box-shadow: 0 22px 58px #0006,inset 0 1px 0 #ffffff09; }
+    .quote-badge { padding: 6px 8px; border: 1px solid #f12d452c; border-radius: 5px; background: #f12d450c; }
+    .quote-item-price { color: #ff7582; }
+    @media (max-width: 1000px) {
+      .shell { width: min(100% - 32px, 920px); }
+      .main-nav { gap: 15px; }
+      .main-nav a { font-size: 9px; }
+      .premium-hero { grid-template-columns: minmax(0,1fr) minmax(0,.82fr); }
+      .hero-copy { padding: 36px; }
+      .hero-visual { min-height: 310px; }
+    }
+    @media (max-width: 760px) {
+      .topbar-inner, .shell { width: min(100% - 26px, 650px); }
+      .main-nav { display: none; }
+      .top-actions { margin-left: auto; }
+      .premium-hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 30px 26px 27px; }
+      .hero-visual { min-height: 255px; border-top: 1px solid #ffffff12; border-left: 0; }
+      .hero-stats { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .hero-stat { padding: 13px 12px; }
+      .hero-stat strong { font-size: 14px; }
+      .workspace { grid-template-columns: 1fr; }
+      .vehicle-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .inventory-controls { grid-template-columns: minmax(0,1fr) 165px; }
+      .quote-card { position: static; }
+    }
+    @media (max-width: 480px) {
+      .shell { width: calc(100% - 22px); padding-top: 16px; }
+      .premium-hero { margin-bottom: 20px; border-radius: 16px; }
+      .hero-copy { padding: 26px 20px 22px; }
+      .hero-title { font-size: clamp(34px,10vw,45px); }
+      .hero-description { margin-top: 13px; font-size: 11px; }
+      .hero-actions { margin-top: 19px; gap: 12px; }
+      .hero-visual { min-height: 220px; }
+      .hero-feature { bottom: 18px; left: 19px; }
+      .hero-feature strong { font-size: 24px; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .hero-stat { grid-template-columns: 1fr auto; align-items: center; padding: 10px 15px; border-right: 0; border-bottom: 1px solid #ffffff10; }
+      .hero-stat:last-child { border-bottom: 0; }
+      .hero-stat strong { font-size: 13px; }
+      .vehicle-section { padding: 14px; border-radius: 14px; }
+      .inventory-controls { grid-template-columns: 1fr; gap: 7px; margin-top: 13px; }
+      .inventory-filter { min-height: 38px; }
+      .vehicle-grid { grid-template-columns: 1fr; gap: 9px; }
+      .vehicle-card { display: grid; grid-template-columns: 39% 1fr; min-height: 144px; }
+      .vehicle-image-wrap { height: 100%; min-height: 144px; aspect-ratio: auto; }
+      .vehicle-details { align-content: center; gap: 5px; padding: 10px 11px; }
+      .vehicle-overline { align-items: flex-start; flex-direction: column; gap: 4px; font-size: 7px; }
+      .vehicle-speed { font-size: 7px; }
+      .vehicle-name { font-size: 13px; }
+      .vehicle-identity { padding-top: 0; font-size: 6px; }
+      .vehicle-identity code { font-size: 8px; }
+      .vehicle-bottom { margin-top: 2px; padding-top: 7px; }
+      .vehicle-price strong { font-size: 17px; }
+      .vehicle-action { gap: 4px; font-size: 7px; }
+      .vehicle-tag { top: 7px; left: 7px; padding: 5px 6px; font-size: 6px; }
+      .vehicle-check { top: 7px; right: 7px; width: 21px; height: 21px; }
+      .inventory-count strong { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">B'W</div>
+        <div>
+          <h1 class="brand-name">BENNY'S <em>ORIGINAL</em> MOTOR WORKS</h1>
+          <p class="brand-subtitle">Customização premium · Performance extrema</p>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegação principal"><a href="#vehicles">Veículos</a><a href="#services">Serviços</a><a href="#quoteTitle">Orçamento</a></nav>
+      <div class="top-actions">
+        <div class="top-total"><span class="top-total-label">TOTAL</span><strong class="top-total-value" id="topTotal">R$ 0</strong></div>
+        <button class="button" type="button" id="topReset" title="Resetar orçamento"><span class="button-icon">↺</span> Resetar</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <section class="premium-hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">BENNY'S · SHOWROOM EXCLUSIVO</span>
+        <h2 class="hero-title" id="heroTitle">Máquinas de respeito. <em>Presença sem igual.</em></h2>
+        <p class="hero-description">Uma seleção especial para quem sabe que cada detalhe faz diferença. Escolha sua próxima máquina e monte seu orçamento em poucos cliques.</p>
+        <div class="hero-actions">
+          <a class="button primary hero-cta" href="#vehicles">EXPLORAR VEÍCULOS <span aria-hidden="true">↗</span></a>
+          <a class="hero-secondary" href="#services">Conhecer a oficina</a>
+        </div>
+      </div>
+      <div class="hero-visual" role="img" aria-label="Ferrari 488 Pista em destaque na Benny's">
+        <img src="/assets/cars/ferrari-488-pista.jpg" alt="" fetchpriority="high">
+        <span class="hero-index">CAPA · 01 / 04</span>
+        <div class="hero-feature"><span>DESTAQUE DA CASA</span><strong>488 PISTA</strong><small>250 KM/H <b>·</b> 20KK</small></div>
+      </div>
+      <div class="hero-stats" aria-label="Resumo da garagem">
+        <div class="hero-stat"><span>FROTA SELECIONADA</span><strong>04 <small>MODELOS</small></strong></div>
+        <div class="hero-stat"><span>VELOCIDADE MÁXIMA</span><strong>270 <small>KM/H</small></strong></div>
+        <div class="hero-stat"><span>VALORES A PARTIR DE</span><strong>15 <em>KK</em></strong></div>
+      </div>
+    </section>
+    <div class="workspace">
+      <div class="catalog">
+
+        <section class="vehicle-section" id="vehicles" aria-labelledby="vehiclesTitle">
+          <div class="inventory-topline">
+            <div>
+              <div class="inventory-kicker">ESTOQUE SELECIONADO · 04 MODELOS</div>
+              <h2 class="inventory-title" id="vehiclesTitle">Garagem premium</h2>
+              <p class="inventory-description">Máquinas exclusivas, prontas para assumir a rua.</p>
+            </div>
+            <div class="inventory-count"><strong>04</strong><span>VEÍCULOS</span></div>
+          </div>
+          <div class="inventory-controls">
+            <label class="inventory-search" for="vehicleSearch"><span aria-hidden="true">⌕</span><input id="vehicleSearch" type="search" autocomplete="off" placeholder="Buscar veículo ou nome de garagem"></label>
+            <select class="inventory-filter" id="vehicleFilter" aria-label="Filtrar veículos por categoria">
+              <option value="all">Todas as categorias</option>
+              <option value="supercarro">Supercarros</option>
+              <option value="jdm">JDM</option>
+              <option value="eletrico">Elétricos</option>
+              <option value="muscle">Muscle</option>
+            </select>
+          </div>
+          <div class="vehicle-grid" id="vehicleCards" aria-live="polite"></div>
+          <p class="inventory-note">Selecione um veículo para adicioná-lo ao orçamento. Os nomes de garagem são os códigos usados para spawn no servidor.</p>
+        </section>
+
+        <section class="service-section" id="services">
+          <div class="section-heading"><span class="section-icon">⚒</span><h2>Reparos</h2><span class="section-rule"></span></div>
+          <div class="service-grid two" id="repairCards"></div>
+        </section>
+
+        <section class="service-section">
+          <div class="section-heading"><span class="section-icon">◉</span><h2>Estética</h2><span class="section-rule"></span></div>
+          <div class="service-grid" id="aestheticCards"></div>
+        </section>
+
+        <section class="service-section">
+          <div class="section-heading"><span class="section-icon">↗</span><h2>Desempenho</h2><span class="section-rule"></span></div>
+          <div class="performance-grid" id="performanceControls"></div>
+          <div class="performance-extras" id="performanceExtras"></div>
+        </section>
+
+        <section class="service-section">
+          <div class="section-heading"><span class="section-icon">⬟</span><h2>Blindagem</h2><span class="section-rule"></span></div>
+          <div class="performance-grid">
+            <div class="upgrade-card" id="armorCard">
+              <label class="upgrade-label" for="armorSelect">Blindagem</label>
+              <select class="upgrade-select" id="armorSelect" aria-label="Nível da blindagem"></select>
+            </div>
+            <div id="armorExtras"></div>
+          </div>
+        </section>
+
+        <section class="service-section">
+          <div class="section-heading"><span class="section-icon">✦</span><h2>Pacotes especiais</h2><span class="section-rule"></span></div>
+          <div class="service-grid two" id="packageCards"></div>
+        </section>
+
+        <section class="service-section">
+          <div class="section-heading"><span class="section-icon">▣</span><h2>Vendas</h2><span class="section-rule"></span></div>
+          <div class="service-grid" id="saleCards"></div>
+        </section>
+      </div>
+
+      <aside>
+        <section class="quote-card" aria-labelledby="quoteTitle">
+          <div class="quote-head"><h2 id="quoteTitle">Orçamento</h2><span class="quote-badge">Resumo</span></div>
+          <div class="quote-content" id="quoteContent"></div>
+          <div class="quote-bottom">
+            <div class="quote-total-row">
+              <div><div class="quote-total-label">Total estimado</div><div class="quote-total-value" id="quoteTotal">0</div></div>
+              <span class="quote-total-currency">R$</span>
+            </div>
+            <div class="quote-actions">
+              <button class="button primary" type="button" id="copyQuote" disabled>▣ &nbsp; Copiar orçamento</button>
+              <button class="button reset" type="button" id="summaryReset">↺ &nbsp; Resetar orçamento</button>
+            </div>
+          </div>
+        </section>
+        <div class="footer">Benny's Original Motor Works © 2026<span>Customização premium &amp; performance extrema</span></div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="mobile-bar">
+    <div class="mobile-total"><small>TOTAL ESTIMADO</small><strong id="mobileTotal">R$ 0</strong></div>
+    <button class="button" type="button" id="mobileReset" aria-label="Resetar orçamento">↺</button>
+    <button class="button primary" type="button" id="mobileCopy" disabled>▣ &nbsp; Copiar</button>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const repairItems = [
+        { id: 'repair-shop', name: 'Reparo na oficina', price: 20000 },
+        { id: 'repair-south', name: 'Reparo chamado Sul', price: 30000 },
+        { id: 'repair-north', name: 'Reparo chamado Norte', price: 50000 }
+      ];
+      const aestheticItems = [
+        { id: 'aerofoil', name: 'Aerofólio', price: 26000 },
+        { id: 'seats', name: 'Bancos', price: 22000 },
+        { id: 'horn', name: 'Buzina', price: 18000 },
+        { id: 'headlight-cover', name: 'Capa do farol', price: 26000 },
+        { id: 'hood', name: 'Capô', price: 26000 },
+        { id: 'wheel-color', name: 'Cor da roda', price: 32000 },
+        { id: 'custom-wheels', name: 'Customização de roda', price: 28000 },
+        { id: 'decal', name: 'Decalque', price: 26000 },
+        { id: 'ornaments', name: 'Enfeites', price: 24000 },
+        { id: 'exhaust', name: 'Escapamento', price: 26000 },
+        { id: 'tire-smoke', name: 'Fumaça de pneu', price: 28000 },
+        { id: 'roll-cage', name: 'Gaiola', price: 26000 },
+        { id: 'grille', name: 'Grade', price: 26000 },
+        { id: 'tint', name: 'Insulfilm', price: 15000 },
+        { id: 'windows', name: 'Janelas', price: 22000 },
+        { id: 'dashboard', name: 'Painel', price: 24000 },
+        { id: 'front-bumper', name: 'Para-choque dianteiro', price: 26000 },
+        { id: 'rear-bumper', name: 'Para-choque traseiro', price: 26000 },
+        { id: 'fender', name: 'Para-lama', price: 24000 },
+        { id: 'primary-paint', name: 'Pintura primária', price: 14000 },
+        { id: 'chrome', name: 'Cromado', price: 120000 },
+        { id: 'secondary-paint', name: 'Pintura secundária', price: 24000 },
+        { id: 'pearlescent', name: 'Pintura perolado', price: 24000 },
+        { id: 'plate', name: 'Placa', price: 18000 },
+        { id: 'dials', name: 'Ponteiros', price: 24000 },
+        { id: 'doors', name: 'Portas', price: 26000 },
+        { id: 'wheels', name: 'Rodas', price: 62000 },
+        { id: 'side-skirts', name: 'Saias laterais', price: 26000 },
+        { id: 'roof', name: 'Teto', price: 24000 },
+        { id: 'neon', name: 'Neon', price: 80000 },
+        { id: 'xenon', name: 'Xenon', price: 80000 },
+        { id: 'extras', name: 'Extras', price: 24000 }
+      ];
+      const upgradeGroups = [
+        { id: 'motor', name: 'Motor', levels: [92000, 109000, 128000, 260000] },
+        { id: 'freio', name: 'Freio', levels: [52000, 67000, 88000, 200000] },
+        { id: 'transmissao', name: 'Transmissão', levels: [72000, 89000, 110000, 240000] },
+        { id: 'suspensao', name: 'Suspensão', levels: [72000, 118000, 188000, 215000] }
+      ];
+      const armorLevels = [165000, 235000, 330000, 480000, 600000];
+      const fixedExtras = [
+        { id: 'turbo', name: 'Turbo', price: 300000 },
+        { id: 'tire-armor', name: 'Blindagem de pneus', price: 50000000 },
+        { id: 'full-tuning', name: 'Full Tuning', price: 1000000 },
+        { id: 'repair-kit', name: 'Kit reparo', price: 25000 },
+        { id: 'tires', name: 'Pneus', price: 15000 },
+        { id: 'suspension-control', name: 'Controle de suspensão', price: 5000000 }
+      ];
+
+      const vehicleItems = [
+        { id: 'vehicle-ferrari-488-pista', make: 'Ferrari', name: '488 Pista', category: 'supercarro', categoryLabel: 'Supercarro', model: '488pista', topSpeed: 250, price: 20000000, priceLabel: '20KK', quoteName: 'Ferrari 488 Pista · 488pista', image: '/assets/cars/ferrari-488-pista.jpg', alt: 'Ferrari 488 Pista amarela na frente da Benny’s' },
+        { id: 'vehicle-civic-ek9', make: 'Honda', name: 'Civic EK9', category: 'jdm', categoryLabel: 'JDM', model: 'civicek9', topSpeed: 180, price: 15000000, priceLabel: '15KK', quoteName: 'Honda Civic EK9 · civicek9', image: '/assets/cars/civic-ek9.jpg', alt: 'Honda Civic EK9 cinza na frente da Benny’s' },
+        { id: 'vehicle-tesla-raiden', make: 'Tesla', name: 'Raiden', category: 'eletrico', categoryLabel: 'Elétrico', model: 'rrraidenwideTesla', topSpeed: 260, price: 20000000, priceLabel: '20KK', quoteName: 'Tesla Raiden · rrraidenwideTesla', image: '/assets/cars/tesla-raiden.jpg', alt: 'Tesla Raiden preto na frente da Benny’s' },
+        { id: 'vehicle-mustang', make: 'Ford', name: 'Mustang', category: 'muscle', categoryLabel: 'Muscle', model: 'rrgt50e', topSpeed: 270, price: 15000000, priceLabel: '15KK', quoteName: 'Ford Mustang · rrgt50e', image: '/assets/cars/mustang-rrgt50e.jpg', alt: 'Ford Mustang azul na frente da Benny’s' }
+      ];
+      const serviceById = {};
+      [...repairItems, ...aestheticItems, ...fixedExtras, ...vehicleItems].forEach(item => serviceById[item.id] = item);
+      let selected = {};
+
+      const money = value => 'R$ ' + new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(Math.max(0, Number(value) || 0));
+      const escapeHTML = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
+      const cardHTML = item => {
+        const active = Boolean(selected[item.id]);
+        return '<button class="service-card' + (active ? ' selected' : '') + '" type="button" data-toggle="' + item.id + '" aria-pressed="' + active + '">' +
+          '<span class="service-name">' + escapeHTML(item.name) + '</span>' +
+          '<span class="service-price">' + money(item.price) + '</span>' +
+          '<span class="checkmark" aria-hidden="true">✓</span></button>';
+      };
+
+      const vehicleCardHTML = vehicle => {
+        const active = Boolean(selected[vehicle.id]);
+        const action = active ? 'ADICIONADO' : 'ADICIONAR';
+        return '<button class="vehicle-card' + (active ? ' is-selected' : '') + '" type="button" data-toggle="' + escapeHTML(vehicle.id) + '" aria-pressed="' + active + '" aria-label="' + (active ? 'Remover ' : 'Adicionar ') + escapeHTML(vehicle.make + ' ' + vehicle.name) + ' ao orçamento">' +
+          '<span class="vehicle-image-wrap"><img class="vehicle-photo" src="' + escapeHTML(vehicle.image) + '" alt="' + escapeHTML(vehicle.alt) + '" loading="lazy" decoding="async"><span class="vehicle-tag">' + escapeHTML(vehicle.categoryLabel) + '</span><span class="vehicle-check" aria-hidden="true">✓</span></span>' +
+          '<span class="vehicle-details"><span class="vehicle-overline"><span>' + escapeHTML(vehicle.make) + '</span><span class="vehicle-speed"><b aria-hidden="true">↗</b>' + vehicle.topSpeed + ' KM/H</span></span>' +
+          '<strong class="vehicle-name">' + escapeHTML(vehicle.name) + '</strong>' +
+          '<span class="vehicle-identity"><span>Nome na garagem</span><code>' + escapeHTML(vehicle.model) + '</code></span>' +
+          '<span class="vehicle-bottom"><span class="vehicle-price"><small>Valor do veículo</small><strong>' + escapeHTML(vehicle.priceLabel) + '</strong></span><span class="vehicle-action">' + action + ' <b aria-hidden="true">' + (active ? '✓' : '+') + '</b></span></span></span></button>';
+      };
+      const renderVehicleCards = () => {
+        const container = document.getElementById('vehicleCards');
+        if (!container) return;
+        const query = document.getElementById('vehicleSearch').value.trim().toLocaleLowerCase('pt-BR');
+        const category = document.getElementById('vehicleFilter').value;
+        const filtered = vehicleItems.filter(vehicle => {
+          const matchesCategory = category === 'all' || vehicle.category === category;
+          const searchable = [vehicle.make, vehicle.name, vehicle.model, vehicle.categoryLabel].join(' ').toLocaleLowerCase('pt-BR');
+          return matchesCategory && searchable.includes(query);
+        });
+        container.innerHTML = filtered.length
+          ? filtered.map(vehicleCardHTML).join('')
+          : '<div class="vehicle-empty">Nenhum veículo encontrado. Tente outro nome ou categoria.</div>';
+      };
+      const renderCards = () => {
+        document.getElementById('repairCards').innerHTML = repairItems.map(cardHTML).join('');
+        document.getElementById('aestheticCards').innerHTML = aestheticItems.map(cardHTML).join('');
+        document.getElementById('performanceExtras').innerHTML = cardHTML(fixedExtras[0]);
+        document.getElementById('armorExtras').innerHTML = cardHTML(fixedExtras[1]);
+        document.getElementById('packageCards').innerHTML = cardHTML(fixedExtras[2]);
+        document.getElementById('saleCards').innerHTML = fixedExtras.slice(3).map(cardHTML).join('');
+        renderVehicleCards();
+      };
+      const selectHTML = (id, name, levels, emptyName) => {
+        const options = ['<option value="0">' + emptyName + '</option>'].concat(levels.map((price, index) =>
+          '<option value="' + price + '">Nível ' + (index + 1) + ' - ' + money(price) + '</option>'
+        )).join('');
+        return '<div class="upgrade-card' + (Number(document.getElementById('upgrade-' + id)?.value || 0) > 0 ? ' active' : '') + '" data-upgrade-card="' + id + '">' +
+          '<label class="upgrade-label" for="upgrade-' + id + '">' + escapeHTML(name) + '</label>' +
+          '<select class="upgrade-select" id="upgrade-' + id + '" data-upgrade="' + id + '" aria-label="' + escapeHTML(name) + '">' + options + '</select></div>';
+      };
+      const renderUpgradeGroups = () => {
+        document.getElementById('performanceControls').innerHTML = upgradeGroups.map(group => selectHTML(group.id, group.name, group.levels, 'Nenhum')).join('');
+        const armorOptions = ['<option value="0">Nenhuma</option>'].concat(armorLevels.map((price, index) =>
+          '<option value="' + price + '">Nível ' + (index + 1) + ' - ' + money(price) + '</option>'
+        )).join('');
+        document.getElementById('armorSelect').innerHTML = armorOptions;
+      };
+      const getSelectedItems = () => {
+        const items = Object.keys(selected).map(id => selected[id]);
+        upgradeGroups.forEach(group => {
+          const select = document.getElementById('upgrade-' + group.id);
+          if (select && Number(select.value) > 0) {
+            const option = select.options[select.selectedIndex];
+            items.push({ id: 'upgrade-' + group.id, name: group.name + ' - ' + option.textContent.split(' - ')[0], price: Number(select.value) });
+          }
+        });
+        const armor = document.getElementById('armorSelect');
+        if (armor && Number(armor.value) > 0) {
+          const option = armor.options[armor.selectedIndex];
+          items.push({ id: 'armor-upgrade', name: 'Blindagem - ' + option.textContent.split(' - ')[0], price: Number(armor.value) });
+        }
+        return items;
+      };
+      const renderSummary = () => {
+        const items = getSelectedItems();
+        const total = items.reduce((sum, item) => sum + item.price, 0);
+        const content = document.getElementById('quoteContent');
+        if (!items.length) {
+          content.innerHTML = '<div class="empty-quote"><span class="empty-quote-icon">♧</span><p>Nenhum serviço selecionado</p></div>';
+        } else {
+          content.innerHTML = '<ul class="quote-list">' + items.map(item =>
+            '<li class="quote-item"><span class="quote-item-name">' + escapeHTML(item.quoteName || item.name) + '</span><span class="quote-item-price">' + escapeHTML(item.priceLabel || money(item.price)) + '</span></li>'
+          ).join('') + '</ul>';
+        }
+        document.getElementById('topTotal').textContent = money(total);
+        document.getElementById('quoteTotal').textContent = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(total);
+        document.getElementById('mobileTotal').textContent = money(total);
+        document.getElementById('copyQuote').disabled = items.length === 0;
+        document.getElementById('mobileCopy').disabled = items.length === 0;
+      };
+      const resetQuote = () => {
+        selected = {};
+        document.querySelectorAll('[data-upgrade]').forEach(control => control.value = '0');
+        document.getElementById('armorSelect').value = '0';
+        document.querySelectorAll('.upgrade-card').forEach(card => card.classList.remove('active'));
+        renderCards();
+        renderSummary();
+        showToast('Orçamento resetado.');
+      };
+      let toastTimer;
+      const showToast = message => {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2100);
+      };
+      const copyQuote = async () => {
+        const items = getSelectedItems();
+        if (!items.length) return;
+        const total = items.reduce((sum, item) => sum + item.price, 0);
+        const text = ["BENNY'S ORIGINAL MOTOR WORKS", 'ORÇAMENTO', '', ...items.map(item => '• ' + (item.quoteName || item.name) + ' — ' + (item.priceLabel || money(item.price))), '', 'TOTAL ESTIMADO: ' + money(total)].join('\n');
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(text);
+          else throw new Error('clipboard indisponível');
+          showToast('Orçamento copiado.');
+        } catch (_) {
+          const area = document.createElement('textarea');
+          area.value = text; area.style.position = 'fixed'; area.style.opacity = '0';
+          document.body.appendChild(area); area.select();
+          try { document.execCommand('copy'); showToast('Orçamento copiado.'); } catch (__) { showToast('Não foi possível copiar automaticamente.'); }
+          area.remove();
+        }
+      };
+
+      renderUpgradeGroups();
+      renderCards();
+      renderSummary();
+
+      document.body.addEventListener('click', event => {
+        const button = event.target.closest('[data-toggle]');
+        if (!button) return;
+        const id = button.dataset.toggle;
+        if (selected[id]) delete selected[id];
+        else selected[id] = serviceById[id];
+        renderCards();
+        renderSummary();
+      });
+      document.body.addEventListener('change', event => {
+        const control = event.target.closest('[data-upgrade]');
+        if (control) {
+          control.closest('.upgrade-card').classList.toggle('active', Number(control.value) > 0);
+          renderSummary();
+          return;
+        }
+        if (event.target.id === 'armorSelect') {
+          document.getElementById('armorCard').classList.toggle('active', Number(event.target.value) > 0);
+          renderSummary();
+        }
+      });
+      document.getElementById('vehicleSearch').addEventListener('input', renderVehicleCards);
+      document.getElementById('vehicleFilter').addEventListener('change', renderVehicleCards);
+      ['topReset', 'summaryReset', 'mobileReset'].forEach(id => document.getElementById(id).addEventListener('click', resetQuote));
+      ['copyQuote', 'mobileCopy'].forEach(id => document.getElementById(id).addEventListener('click', copyQuote));
+    })();
+  </script>
+</body>
+</html>
